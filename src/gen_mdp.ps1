@@ -1,12 +1,12 @@
 function get_regex {
     param (
-        [bool]$uppercase,
-        [bool]$number,
-        [bool]$special_char
+        [bool]$uppercase = $false,
+        [bool]$number = $false,
+        [bool]$special_char = $false
     )
     
     if ($uppercase -and $number -and $special_char) {
-        return "^[a-zA-Z0-9\W_]+$"
+        return "[a-zA-Z0-9\W_]"
     }
 
     $regex = "[a-z"
@@ -34,7 +34,7 @@ function get_mdp {
         [bool]$number,
         [bool]$special_char
     )
-    $regex = get_regex $uppercase $number $special_char
+    $regex = get_regex -uppercase $uppercase -number $number -special_char $special_char
     $nb = $size - ($uppercase, $number, $special_char | Where-Object { $_ -eq $true }).Count
     $characters = $regex.Matches("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&*-:;<=>?_")
     $password = Get-Random -Count $nb -InputObject $characters
