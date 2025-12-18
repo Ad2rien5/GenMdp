@@ -86,7 +86,7 @@ function main {
     }
 
     Write-Output "Test finish successfully"
-    Write-Output $count "out of 8 were successfull"
+    Write-Output ("{0} out of 8 were successfull" -f $count)
 }
 
 $sourcePath = Join-Path $PSScriptRoot "..\src\gen_mdp.ps1"
