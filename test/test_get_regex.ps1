@@ -16,7 +16,7 @@ function main {
     # case None
     $oracle = "[a-z]"
     if (test_case -oracle $oracle) {
-        Write-Host "'None' test case succed"
+        Write-Host "'None' test case succeed"
         $count++
     } else {
         Write-Host "'None' test case failed"
@@ -25,7 +25,7 @@ function main {
     # case upper
     $oracle = "[a-zA-Z]"
     if (test_case -oracle $oracle -uppercase $true) {
-        Write-Host "'Upper' test case succed"
+        Write-Host "'Upper' test case succeed"
         $count++
     } else {
         Write-Host "'Upper' test case failed"
@@ -34,7 +34,7 @@ function main {
     # case number
     $oracle = "[a-z0-9]"
     if (test_case -oracle $oracle -number $true) {
-        Write-Host "'Number' test case succed"
+        Write-Host "'Number' test case succeed"
         $count++
     } else {
         Write-Host "'Number' test case failed"
@@ -43,7 +43,7 @@ function main {
     # case special char
     $oracle = "[a-z^a-zA-Z0-9]"
     if (test_case -oracle $oracle -special_char $true) {
-        Write-Host "'Special char' test case succed"
+        Write-Host "'Special char' test case succeed"
         $count++
     } else {
         Write-Host "'Special char' test case failed"
@@ -52,7 +52,7 @@ function main {
     # case upper + number
     $oracle = "[a-zA-Z0-9]"
     if (test_case -oracle $oracle -uppercase $true -number $true) {
-        Write-Host "'upper + number' test case succed"
+        Write-Host "'upper + number' test case succeed"
         $count++
     } else {
         Write-Host "'upper + number' test case failed"
@@ -61,7 +61,7 @@ function main {
     # case number + special char
     $oracle = "[a-z0-9^a-zA-Z0-9]"
     if (test_case -oracle $oracle -number $true -special_char $true) {
-        Write-Host "'number + special char' test case succed"
+        Write-Host "'number + special char' test case succeed"
         $count++
     } else {
         Write-Host "'number + special char' test case failed"
@@ -70,7 +70,7 @@ function main {
     # case upper + special char
     $oracle = "[a-zA-Z^a-zA-Z0-9]"
     if (test_case -oracle $oracle -uppercase $true -special_char $true) {
-        Write-Host "'Upper + Special char' test case succed"
+        Write-Host "'Upper + Special char' test case succeed"
         $count++
     } else {
         Write-Host "'Upper + Special char' test case failed"
@@ -79,7 +79,7 @@ function main {
     # case all
     $oracle = "[a-zA-Z0-9\W_]"
     if (test_case -oracle $oracle -uppercase $true -number $true -special_char $true) {
-        Write-Host "'All' test case succed"
+        Write-Host "'All' test case succeed"
         $count++
     } else {
         Write-Host "'All' test case failed"

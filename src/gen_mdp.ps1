@@ -36,24 +36,24 @@ function get_mdp {
     )
     $regex = get_regex -uppercase $uppercase -number $number -special_char $special_char
     $nb = $size - ($uppercase, $number, $special_char | Where-Object { $_ -eq $true }).Count
-    $characters = $regex.Matches("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&*-:;<=>?_")
-    $password = Get-Random -Count $nb -InputObject $characters
+    $characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&*-:;<=>?_" -replace "[^$regex]", "" 
+    $password = -join ($characters.ToCharArray() | Get-SecureRandom -Count $nb)
 
     if ($uppercase) {
-        $rd_char = Get-Random -InputObject "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        $rd_pos = Get-Random -Maximum $nb
+        $rd_char = Get-SecureRandom -InputObject "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        $rd_pos = Get-SecureRandom -Maximum $nb
         $password = $password.Insert($rd_pos, $rd_char)
         $nb++
     }
     if ($number) {
-        $rd_char = Get-Random -InputObject "0123456789"
-        $rd_pos = Get-Random -Maximum $nb
+        $rd_char = Get-SecureRandom -InputObject "0123456789"
+        $rd_pos = Get-SecureRandom -Maximum $nb
         $password = $password.Insert($rd_pos, $rd_char)
         $nb++
     }
     if ($special_char) {
-        $rd_char = Get-Random -InputObject "!#$%&*-:;<=>?_"
-        $rd_pos = Get-Random -Maximum $nb
+        $rd_char = Get-SecureRandom -InputObject "!#$%&*-:;<=>?_"
+        $rd_pos = Get-SecureRandom -Maximum $nb
         $password = $password.Insert($rd_pos, $rd_char)
     }
 
