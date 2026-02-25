@@ -1,28 +1,39 @@
 @echo off
 
+:: Function
+: IsBool
+if /i %test=="y" (
+    set bool=true
+) else if /i %test=="n" (
+    set bool=false
+    goto %
+
+) else (
+    echo Your input is not a valid answer, try again.
+    goto %actual%
+)
+
 :: Size of the password
+: Password
 set /p "nombre=Which size should be this new password : "
 
 for /f "delims=0123456789" %%a in ("%nombre%") do (
     echo Your input is not a valid number, try again.
-    goto demande
+    goto Password
 )
 
 :: Specification of the new password
-:: Uppercase
+: Uppercase
+set actual=Uppercase
+set next=Number
 
-:: Number
+: Number
+set actual=Number
+set next=SpecialChar
 
-:: Special character
+: SpecialChar
+set actual=SpecialChar
+set next=END
 
-:: Function
-: IsBool
-if /i %1=="y" (
-    set bool=true
-) else if /i %1=="n" (
-    echo Vous avez choisi : Non
-    set bool=false
-) else (
-    echo Your input is not a valid answer, try again.
-    goto %2
-)
+:: END
+: END
