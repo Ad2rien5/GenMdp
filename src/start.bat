@@ -18,9 +18,9 @@ if "%test%"=="y" (
 
 :: Size of the password
 : Password
-set /p "nombre=Which size should be this new password : "
+set /p "number=Which size should be this new password : "
 
-for /f "delims=0123456789" %%a in ("%nombre%") do (
+for /f "delims=0123456789" %%a in ("%number%") do (
     echo Your input is not a valid number, try again.
     goto Password
 )
@@ -44,11 +44,16 @@ goto IsBool
 : SpecialChar
 set number=%bool%
 set actual=SpecialChar
-set next=END
+set next=GenMDP
 
 set /p "test=Are special character allowed?(y/n) "
 goto IsBool
 
-:: End of File
-: END
+:: Call to powershell file
+: GenMDP
+for /f "usebackq delims=" %%i in (`
+    powershell -NoProfile -ExecutionPolicy Bypass -File "gen_mdp.ps1" -size "%size%" -uppercase "%Uppercase%" -number "%Number%" -special_char "%SpecialChar%" 2^>nul
+`) do set "result=%%i"
+
+echo Result: %result%
 pause

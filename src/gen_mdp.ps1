@@ -1,3 +1,11 @@
+param (
+    [int]$size,
+    [bool]$uppercase,
+    [bool]$number,
+    [bool]$special_char
+)
+
+
 function get_regex {
     param (
         [bool]$uppercase = $false,
@@ -26,6 +34,7 @@ function get_regex {
     $regex += "]"
     return $regex
 }
+
 
 function get_mdp {
     param (
@@ -57,6 +66,8 @@ function get_mdp {
         $password = $password.Insert($rd_pos, $rd_char)
     }
 
-    Write-Host $password
     return $password
 }
+
+$result = get_mdp -size $size -uppercase $uppercase -number $number -special_char $special_char
+Write-Output ($result)
